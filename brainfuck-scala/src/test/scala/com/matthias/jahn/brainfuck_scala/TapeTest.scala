@@ -4,24 +4,28 @@ import org.scalatest.junit.JUnitRunner
 import org.junit.runner.RunWith
 import org.scalatest.FunSuite
 import org.scalatest.matchers.ShouldMatchers
+import org.scalatest.BeforeAndAfterEach
 
 @RunWith(classOf[JUnitRunner])
-class TapeTest extends FunSuite with ShouldMatchers{
+class TapeTest extends FunSuite with ShouldMatchers with BeforeAndAfterEach{
+	
+	var tape: Tape = _
+	
+	override def beforeEach() {
+		tape = new Tape()
+	}
 
 	test("value of new tape should be 0") {
-		val tape = new Tape()
 		tape.currentValue should be (0)
 	}
 	
 	test("value of new tape incremented once should be 1") {
-		val tape = new Tape()
 		tape.increment()
 		
 		tape.currentValue should be (1)
 	}
 	
 	test("initial value of left spot should be 0"){
-		val tape = new Tape()
 		tape.increment()
 		tape.moveLeft()
 		
@@ -29,7 +33,6 @@ class TapeTest extends FunSuite with ShouldMatchers{
 	}
 	
 	test("initial value of right spot should be 0"){
-		val tape = new Tape()
 		tape.increment()
 		tape.moveRight()
 		
@@ -37,7 +40,6 @@ class TapeTest extends FunSuite with ShouldMatchers{
 	}
 	
 	test("value of a spot should be persistent between moves"){
-		val tape = new Tape()
 		tape.increment()
 		
 		tape.moveLeft()

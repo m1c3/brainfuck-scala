@@ -3,7 +3,7 @@ import scala.collection.mutable
 
 /**
  * The representation of the tape, a brainfuck programm is running on.
- * 
+ *
  * @author Matthias Jahn
  */
 class Tape {
@@ -13,6 +13,7 @@ class Tape {
   private var value = 0
 
   def currentValue = value
+  def currentValue_=(value: Int) { this.value = value }
 
   def increment() { value += 1 }
   def decrement() { value -= 1 }
