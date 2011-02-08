@@ -1,6 +1,11 @@
 package com.matthias.jahn.brainfuck_scala
 import scala.collection.mutable
 
+/**
+ * The representation of the tape, a brainfuck programm is running on.
+ * 
+ * @author Matthias Jahn
+ */
 class Tape {
 
   private val left = new mutable.Stack[Int]()
@@ -9,10 +14,10 @@ class Tape {
 
   def currentValue = value
 
-  def increment { value += 1 }
-  def decrement { value -= 1 }
+  def increment() { value += 1 }
+  def decrement() { value -= 1 }
 
-  def moveLeft {
+  def moveLeft() {
     right.push(value)
 
     if (left.isEmpty) {
@@ -22,7 +27,7 @@ class Tape {
     }
   }
 
-  def moveRight {
+  def moveRight() {
     left.push(value)
 
     if (right.isEmpty) {
