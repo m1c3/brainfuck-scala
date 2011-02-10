@@ -44,10 +44,12 @@ class Parser(private val iter: Iterator[Char]) {
     	if(currentChar == ']'){
     		parent.addChildCommand(cmd)
     		return true
+    	} else {
+    		parseCommand(cmd)
     	}
     }
-
-    return false
+    
+    throw new SyntaxException
   }
 
 }

@@ -53,4 +53,20 @@ class ParserTest extends FunSuite with ShouldMatchers {
     
     assert(iter.next.isInstanceOf[WhileCommand])
   }
+  
+  test("parsing '[' should throw SyntaxException"){
+	  val parser = new Parser("[".iterator)
+	   
+	   evaluating {parser.parse } should produce [SyntaxException]
+  }
+  
+  test("parsing '[+]'") {
+    val parser = new Parser("[+]".iterator)
+    
+    val program = parser.parse
+    val iter = program.childCommands
+    
+    val whileCmd = iter.next.asInstanceOf[WhileCommand]
+    assert(whileCmd.childCommands.next.isInstanceOf[PlusCommand])
+  }
 }
