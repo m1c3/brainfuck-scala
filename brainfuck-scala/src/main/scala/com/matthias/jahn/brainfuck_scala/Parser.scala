@@ -1,10 +1,15 @@
 package com.matthias.jahn.brainfuck_scala
 
-class Parser(private val iter: Iterator[Char]) {
-  private var currentChar: Char = _
+import java.io.Reader
+import java.io.Writer
 
-  def parse(): Program = {
-    val program: Program = new Program()
+class Parser(private val in: Reader, private val out: Writer) {
+  private var currentChar: Char = _
+  private var iter: Iterator[Char] = _
+
+  def parse(iter: Iterator[Char]): Program = {
+	this.iter = iter
+    val program: Program = new Program(new Tape())
 
     while (iter.hasNext) {
       currentChar = iter.next
@@ -25,6 +30,8 @@ class Parser(private val iter: Iterator[Char]) {
       case '-' => parent.addChildCommand(new MinusCommand())
       case '<' => parent.addChildCommand(new MoveLeftCommand())
       case '>' => parent.addChildCommand(new MoveRightCommand())
+      case '.' => parent.addChildCommand(new WriteCommand(out))
+      case ',' => parent.addChildCommand(new ReadCommand(in))
       case _ => return false
     }
 
