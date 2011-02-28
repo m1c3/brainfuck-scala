@@ -73,5 +73,6 @@ class ReadCommand(private val reader: Reader) extends Command {
 class WriteCommand(private val writer: Writer) extends Command {
 	override def execute(tape: Tape) {
 		writer.write(tape.currentValue)
+		writer.flush()
 	}
 }
